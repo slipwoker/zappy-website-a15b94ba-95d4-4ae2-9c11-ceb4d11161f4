@@ -1,0 +1,754 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flights to | flights to anywhere</title>
+  <meta name="description" content="בית - Flights to provides professional תיירות ונסיעות services. Specializing in flights to anywhere.">
+  <meta name="keywords" content="flights to anywhere, cheapest days to fly, flights to zanzibar, Flights to">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Flights to | flights to anywhere">
+  <meta property="og:description" content="בית - Flights to provides professional תיירות ונסיעות services. Specializing in flights to anywhere.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flights to | flights to anywhere">
+  <meta name="twitter:description" content="בית - Flights to provides professional תיירות ונסיעות services. Specializing in flights to anywhere.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'a15b94ba-95d4-4ae2-9c11-ceb4d11161f4',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="Flights to" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/destinations">יעדים</a></li><li><a href="/deals">מבצעים</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="flights-to-hero-section" data-layout-spec="בית-hero" data-hero-type="fullscreen-scrim">
+  <div class="flights-to-hero-bg-wrapper">
+    <img data-hero-bg="true" data-placeholder="flights-to-hero-image-1" data-context="Cinematic night-time airport runway scene with dramatic lighting - wide angle shot of illuminated runway lights creating leading lines into the distance, deep blue-purple twilight sky with stars, modern aircraft silhouette in background, professional aviation photography with strong contrast and neon glow effects, moody atmospheric lighting suggesting midnight departure, high-end travel photography aesthetic" class="flights-to-hero-bg-image" width="1920" height="1080" src="/assets/site-flights-to-hero-image-1.webp" alt="נוף דרמטי של מסלול נמל תעופה בלילה עם תאורת LED">
+    <div class="flights-to-hero-scrim" aria-hidden="true"></div>
+  </div>
+  
+  <div class="flights-to-hero-content-wrapper">
+    <div class="flights-to-hero-content">
+      <h1 class="flights-to-hero-headline">מבצעי חצות. נחיתות באור יום.</h1>
+      <h3 class="flights-to-hero-subtitle">תכנון נסיעות פרימיום והצעות יעדים מוקפדות שמתקדמות מהר—בלי הכאוס.</h3>
+      
+      <div class="flights-to-hero-cta-row">
+        <a href="/contact" class="flights-to-hero-btn flights-to-hero-btn-primary">בקש תכנון טיול</a>
+        <a href="/deals" class="flights-to-hero-btn flights-to-hero-btn-secondary">גלה דילים חמים</a>
+      </div>
+      
+      <div class="flights-to-hero-credibility">
+        <span class="flights-to-hero-credibility-item">מסלולים מוקפדים</span>
+        <span class="flights-to-hero-credibility-dot" aria-hidden="true">•</span>
+        <span class="flights-to-hero-credibility-item">הנחיית מחירים שקופה</span>
+        <span class="flights-to-hero-credibility-dot" aria-hidden="true">•</span>
+        <span class="flights-to-hero-credibility-item">מענה אנושי מהיר</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="flights-to-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="flights-to-runway-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#10CFE0;stop-opacity:0.6"></stop>
+          <stop offset="50%" style="stop-color:#6D28FF;stop-opacity:0.4"></stop>
+          <stop offset="100%" style="stop-color:#FF2D8D;stop-opacity:0.3"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,100 L0,25 L1200,70 L1200,100 Z" fill="var(--bg-dark)"></path>
+      <path d="M0,100 L0,25 L1200,70 L1200,100 Z" fill="url(#flights-to-runway-gradient)" opacity="0.15"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-showcase-section" data-layout-spec="בית-showcase">
+  <div class="home-showcase-container">
+    <div class="home-showcase-intro">
+      <h2 class="home-showcase-title">מבצעי הלילה החמים</h2>
+      <p class="home-showcase-subtitle">טיסות נבחרות ביד שמרגישות כמו מחלקה ראשונה—בלי הרעש.</p>
+    </div>
+
+    <div class="home-showcase-grid">
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-1" data-context="Stunning aerial view of Lisbon, Portugal at golden hour - terracotta rooftops, Tagus River, historic architecture, warm sunset light, cinematic travel photography for premium flight deals website" width="600" height="800" src="/assets/site-home-showcase-image-1.webp" alt="ליסבון, פורטוגל - נוף עילי של גגות טרקוטה ונהר טאגוס">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">ליסבון</h3>
+          <p class="home-showcase-card-price">החל מ-$799</p>
+          <p class="home-showcase-card-description">מושלם לחופשות סוף שבוע ארוכות</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-2" data-context="Vibrant Bangkok, Thailand cityscape at dusk - ornate golden temples, bustling street markets, Chao Phraya River, modern skyscrapers mixed with traditional architecture, neon lights beginning to glow, cinematic travel photography" width="600" height="800" src="/assets/site-home-showcase-image-2.webp" alt="בנגקוק, תאילנד - מקדשים מוזהבים ושווקי רחוב תוססים">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">בנגקוק</h3>
+          <p class="home-showcase-card-price">החל מ-$949</p>
+          <p class="home-showcase-card-description">חוויה אקזוטית עם תקציב חכם</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-3" data-context="Iconic Rome, Italy scenery - Colosseum at twilight, ancient Roman ruins, cobblestone streets, classic Italian architecture, warm amber street lights, romantic European atmosphere, premium travel photography" width="600" height="800" src="/assets/site-home-showcase-image-3.webp" alt="רומא, איטליה - הקולוסיאום בשעת דמדומים">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">רומא</h3>
+          <p class="home-showcase-card-price">החל מ-$699</p>
+          <p class="home-showcase-card-description">היסטוריה, תרבות וקולינריה</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-4" data-context="Futuristic Tokyo, Japan cityscape at night - neon-lit Shibuya crossing, towering skyscrapers, cherry blossom trees, blend of ultra-modern and traditional Japanese elements, vibrant city lights, cinematic night photography" width="600" height="800" src="/assets/site-home-showcase-image-4.webp" alt="טוקיו, יפן - צומת שיבויה מוארת בניאון">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">טוקיו</h3>
+          <p class="home-showcase-card-price">החל מ-$1,199</p>
+          <p class="home-showcase-card-description">עתיד פוגש מסורת בהרמוניה</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-5" data-context="Breathtaking Santorini, Greece - iconic white-washed buildings with blue domes, stunning caldera views, Aegean Sea sunset, romantic Mediterranean atmosphere, luxury travel destination photography" width="600" height="800" src="/assets/site-home-showcase-image-5.webp" alt="סנטוריני, יוון - בניינים לבנים וכיפות כחולות">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">סנטוריני</h3>
+          <p class="home-showcase-card-price">החל מ-$849</p>
+          <p class="home-showcase-card-description">רומנטיקה ים תיכונית טהורה</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="home-showcase-card">
+        <div class="home-showcase-card-image">
+          <img data-placeholder="home-showcase-image-6" data-context="Majestic Dubai, UAE skyline - Burj Khalifa tower, luxury modern architecture, desert sunset backdrop, golden hour lighting, opulent Middle Eastern destination, premium travel photography" width="600" height="800" src="/assets/site-home-showcase-image-6.webp" alt="דובאי, איחוד האמירויות - מגדל בורג' ח'ליפה">
+        </div>
+        <div class="home-showcase-card-content">
+          <h3 class="home-showcase-card-destination">דובאי</h3>
+          <p class="home-showcase-card-price">החל מ-$899</p>
+          <p class="home-showcase-card-description">יוקרה ופאר במדבר</p>
+          <a href="/contact" class="home-showcase-card-cta">תפסו את המבצע <i class="fas fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="home-showcase-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="home-showcase-divider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#0B1220;stop-opacity:0.4"></stop>
+          <stop offset="100%" style="stop-color:#0B1220;stop-opacity:1"></stop>
+        </linearGradient>
+        <filter id="home-showcase-glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"></feGaussianBlur>
+          <feMerge>
+            <feMergeNode in="coloredBlur"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      </defs>
+      <path d="M0,100 L0,50 Q150,45 300,52 T600,48 Q750,52 900,45 T1200,50 L1200,100 Z" fill="url(#home-showcase-divider-gradient)"></path>
+      <path d="M0,50 Q150,45 300,52 T600,48 Q750,52 900,45 T1200,50" fill="none" stroke="#10CFE0" stroke-width="1" opacity="0.4" filter="url(#home-showcase-glow)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-process-section" data-layout-spec="בית-process">
+  <div class="home-process-container">
+    <div class="home-process-content">
+      <h2 class="home-process-title">מרעיון להמראה</h2>
+      <p class="home-process-intro">דרך יעילה לתכנן טיסות בביטחון ובמהירות.</p>
+      
+      <div class="home-process-steps">
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+              <path d="M20 12v8l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div class="home-process-step-content">
+            <h3 class="home-process-step-title">ספרו לנו את הסגנון שלכם</h3>
+            <p class="home-process-step-text">שתפו תאריכים גמישים, טווח תקציב ודרישות חובה.</p>
+          </div>
+        </div>
+        
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="12" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"></rect>
+              <path d="M8 18h24M14 12v-3M26 12v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              <circle cx="15" cy="23" r="1.5" fill="currentColor"></circle>
+              <circle cx="20" cy="23" r="1.5" fill="currentColor"></circle>
+              <circle cx="25" cy="23" r="1.5" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <div class="home-process-step-content">
+            <h3 class="home-process-step-title">אנחנו מאצרים אפשרויות</h3>
+            <p class="home-process-step-text">תקבלו רשימה ברורה עם הסברים על היתרונות והחסרונות.</p>
+          </div>
+        </div>
+        
+        <div class="home-process-step">
+          <div class="home-process-step-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20l8 8 12-16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            </svg>
+          </div>
+          <div class="home-process-step-content">
+            <h3 class="home-process-step-title">אתם בוחרים, אנחנו משכללים</h3>
+            <p class="home-process-step-text">אנחנו מלטשים את התוכנית ושולחים מתווה מוכן להזמנה.</p>
+          </div>
+        </div>
+      </div>
+      
+      <a href="/contact" class="home-process-cta btn-secondary">התחילו תדריך טיסה</a>
+    </div>
+    
+    <div class="home-process-visual">
+      <div class="home-process-image-wrapper">
+        <img data-placeholder="home-process-image-1" data-context="Cinematic night airport terminal corridor with dramatic lighting - modern glass architecture, polished floors reflecting neon blue and purple lights, empty terminal at night with departure gates visible in distance, atmospheric fog, professional travel photography, wide angle shot, moody cinematic lighting, ultra high quality" width="700" height="900" src="/assets/site-home-process-image-1.webp" alt="מסדרון טרמינל שדה תעופה בלילה">
+        <div class="home-process-image-overlay"></div>
+      </div>
+      <div class="home-process-glass-accent"></div>
+    </div>
+  </div>
+  
+  <div class="home-process-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="ticket-holes" x="0" y="0" width="40" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="20" cy="45" r="6" fill="var(--bg-dark)"></circle>
+        </pattern>
+      </defs>
+      <path d="M0,60 L0,15 Q50,18 100,15 T200,18 Q250,15 300,18 T400,15 Q450,18 500,15 T600,18 Q650,15 700,18 T800,15 Q850,18 900,15 T1000,18 Q1050,15 1100,18 T1200,15 L1200,60 Z" fill="var(--bg-dark)"></path>
+      <rect x="0" y="0" width="1200" height="60" fill="url(#ticket-holes)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="home-testimonials-section" data-layout-spec="בית-testimonials">
+  <div class="home-testimonials-container">
+    <div class="home-testimonials-intro">
+      <h2>אהובים על בהירות ומהירות</h2>
+      <p>תכנון פרימיום ללא הלוך ושוב אינסופי. רוב הפניות נענות תוך 24 שעות.</p>
+    </div>
+    
+    <div class="home-testimonials-grid">
+      <div class="home-testimonials-card">
+        <p class="home-testimonials-quote">"קיבלנו תשובות מפורטות תוך יום, והכל היה מדויק בדיוק כמו שהובטח. חוויה מרעננת."</p>
+        <div class="home-testimonials-author">
+          <p class="home-testimonials-name">רונית ואייל כהן</p>
+          <h3 class="home-testimonials-trip">בריחה ליום השנה</h3>
+        </div>
+      </div>
+      
+      <div class="home-testimonials-card">
+        <p class="home-testimonials-quote">"המחיר שקיבלנו היה הוגן והשקוף. לא היו הפתעות, והשירות היה מקצועי מהרגע הראשון."</p>
+        <div class="home-testimonials-author">
+          <p class="home-testimonials-name">דני ושירה לוי</p>
+          <h3 class="home-testimonials-trip">חופשה משפחתית באירופה</h3>
+        </div>
+      </div>
+      
+      <div class="home-testimonials-card">
+        <p class="home-testimonials-quote">"הרגשנו בטוחים לאורך כל התהליך. כל שאלה נענתה במהירות ובסבלנות, וזה נתן לנו ביטחון מלא."</p>
+        <div class="home-testimonials-author">
+          <p class="home-testimonials-name">מיכל ויוסי אברהם</p>
+          <h3 class="home-testimonials-trip">טיול הרפתקאות באסיה</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="home-testimonials-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="filmFadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgba(7,10,15,0);stop-"></stop>
+          <stop offset="40%" style="stop-color:rgba(7,10,15,0.3);stop-opacity:1"></stop>
+          <stop offset="70%" style="stop-color:rgba(7,10,15,0.7);stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:rgba(7,10,15,0.95);stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1200" height="120" fill="url(#filmFadeGradient)"></rect>
+      <line x1="0" y1="118" x2="1200" y2="118" stroke="rgba(16,207,224,0.25)" stroke-width="2"></line>
+    </svg>
+  </div>
+</section>
+
+<section class="home-cta-section" data-layout-spec="בית-cta">
+  <div class="home-cta-container">
+    <div class="home-cta-content">
+      <h2 class="home-cta-title">מוכנים לתכנן את הסצנה הבאה?</h2>
+      <p class="home-cta-description">שלחו הודעה קצרה—קבלו רשימה מותאמת שמשלבת את הקצב והתקציב שלכם.</p>
+      
+      <div class="home-cta-buttons">
+        <a href="/contact" class="home-cta-btn home-cta-btn-primary">
+          <span>צרו קשר</span>
+          <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        <a href="/deals" class="home-cta-btn home-cta-btn-secondary">
+          <span>צפו בדילים</span>
+          <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="home-cta-reassurance">
+        <span class="home-cta-reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          ללא ספאם
+        </span>
+        <span class="home-cta-reassurance-divider">•</span>
+        <span class="home-cta-reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          מענה אנושי
+        </span>
+        <span class="home-cta-reassurance-divider">•</span>
+        <span class="home-cta-reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          צעדים ברורים
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="home-cta-glow-orb home-cta-glow-orb-1" aria-hidden="true"></div>
+  <div class="home-cta-glow-orb home-cta-glow-orb-2" aria-hidden="true"></div>
+</section>
+  </main>
+  
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-column footer-about">
+        <img src="/assets/business-logo.webp" alt="Flights to" class="logo" />
+        <p class="footer-description">המקור המהימן שלך לטיסות במחירים הטובים ביותר ליעדים ברחבי העולם. אנחנו כאן כדי להפוך את חלום הטיסה שלך למציאות.</p>
+      </div>
+      
+      <div class="footer-column">
+        <h3 class="footer-title">קישורים מהירים</h3>
+        <ul class="footer-links">
+          <li><a href="/destinations">יעדים</a></li>
+          <li><a href="/deals">מבצעים</a></li>
+          <li><a href="/contact">צור קשר</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3 class="footer-title">יצירת קשר</h3>
+        <ul class="footer-contact">
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:[business_email]">[business_email]</a>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:[business_phone]">[business_phone]</a>
+          </li>
+          <li><a href="/"><i class="fas fa-map-marker-alt"></i>
+            <span>[business_address]</span></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3 class="footer-title">עקבו אחרינו</h3>
+        <div class="social-links">
+          <a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="/privacy">מדיניות פרטיות</a>
+        <span class="separator">|</span>
+        <a href="/terms">תנאים והגבלות</a>
+        <span class="separator">|</span>
+        <a href="/accessibility">הצהרת נגישות</a>
+      </div>
+      <div class="footer-copyright">
+        <p>© 2026 Flights to. כל הזכויות שמורות.</p>
+      </div>
+      <div class="footer-attribution">
+        <a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
