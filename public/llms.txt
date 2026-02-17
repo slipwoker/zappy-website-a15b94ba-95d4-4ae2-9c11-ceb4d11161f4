@@ -1,6 +1,4 @@
-# Flights to — Generative Engine Optimization Map
-
-> A תיירות ונסיעות business.
+# Business — Generative Engine Optimization Map
 
 ---
 
@@ -36,15 +34,7 @@ Information about WCAG compliance and accessibility features.
 
 # Business Context (for LLM understanding)
 
-## About Flights to
-Flights to is a business in the תיירות ונסיעות industry.
-
-## Target Audience
-- מטיילים יוקרתיים
-
-## Industry
-תיירות ונסיעות
-
+## About Business
 ---
 
 # Additional Resources
